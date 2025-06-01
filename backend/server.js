@@ -1,7 +1,8 @@
 const express = require("express");
-const mongoose = require("mongoose");
+
 const cors = require("cors");
 const path = require("path");
+const { connectDB } = require("./db/db.js");
 
 const app = express();
 
@@ -12,13 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://u21ec122:u21ec122@cluster0.n5kskdh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", console.log("mongodb connected"));
 
-
+connectDB();
 
 // Import Routes
 const productRoutes = require("./routes/productRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
+
 
 app.use("/api/products", productRoutes);
 app.use("/api/invoice", invoiceRoutes);
